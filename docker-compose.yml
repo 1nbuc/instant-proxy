@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: 1nbuc/instant-proxy:latest
+    image: ghcr.io/1nbuc/instant-proxy:latest
     container_name: nginx_server
     ports:
       - "80:80"
