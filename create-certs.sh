@@ -1,3 +1,5 @@
+#!/bin/sh
+
 openssl genrsa -out server.key 4096
 touch openssl.cnf
 
