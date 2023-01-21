@@ -1,4 +1,4 @@
 mkdir /certs
-./create-certs.sh
-python3 create-config.py
+/app/create-certs.sh
+python3 /app/create-config.py
 nginx -g "daemon off;"
