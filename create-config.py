@@ -60,7 +60,6 @@ for port in PORTS:
     '''.format(port=port, servername=SERVERNAMES)
     full_config += CONFIG_STR
 
-full_config += '}'
 
 # check if /etc/nginx/default.conf exists
 if not os.path.exists('/etc/nginx/proxy.conf'):
