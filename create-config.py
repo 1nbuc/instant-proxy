@@ -13,6 +13,13 @@ SERVERNAMES = SERVERNAMES.replace(',', ' ') + ' localhost' if SERVERNAMES else '
 SSL_PORTS = SSL_PORTS.split(',') if SSL_PORTS else ["443"]
 PORTS = PORTS.split(',') if PORTS else ["80"]
 
+CERTPATH = '/certs/server.crt'
+KEYPATH = '/certs/server.key'
+
+if os.path.isdir('/etc/letsencrypt/live'):
+    CERTPATH = '/etc/letsencrypt/live/{}/fullchain.pem'.format(SERVERNAMES)
+    KEYPATH = '/etc/letsencrypt/live/{}/privkey.pem'.format(SERVERNAMES)
+
 full_config = ''
 
 for port in SSL_PORTS:
@@ -29,16 +36,14 @@ for port in SSL_PORTS:
         add_header Content-Security-Policy "default-src * data: 'unsafe-eval' 'unsafe-inline'" always;
         # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
-        ssl_certificate /certs/server.crt;
-        ssl_certificate_key /certs/server.key;
-        ssl_client_certificate /certs/server.crt;
-        ssl_verify_client optional;
+        ssl_certificate {certpath};
+        ssl_certificate_key {keypath};
 
         location / {{
             proxy_pass http://{container_addr};
         }}
     }}
-    '''.format(port=port, servername=SERVERNAMES, container_addr=CONTAINER_ADDR)
+    '''.format(port=port, servername=SERVERNAMES, container_addr=CONTAINER_ADDR, certpath=CERTPATH, keypath=KEYPATH)
     full_config += CONFIG_STR
 
 for port in PORTS:
