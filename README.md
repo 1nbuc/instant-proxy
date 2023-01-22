@@ -18,7 +18,7 @@ Starts a proxy which listens on port 443 and forwards all requests to container 
 ### Connect to localhost
 ```shell
 docker run -d -p 443:443 \
-  --add-host host.docker.internal:host-gateway
+  --add-host host.docker.internal:host-gateway \
   --name=proxy1 \
    -e CONTAINER_ADDR=host.docker.internal:3000 \
   ghcr.io/1nbuc/instant-proxy
