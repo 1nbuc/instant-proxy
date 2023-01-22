@@ -11,4 +11,16 @@ services:
     environment:
       SSL_PORTS: 443
       PORTS: 80
-      CONTAINER_ADDR: hardware-inventory:3000
+      CONTAINER_ADDR: myapp:3000
+    depends_on:
+      - myapp
+  myapp:
+    image: my.own/app:latest
+    container_name: webserver
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+    volumes:
+      - ./myapp:/app
+    depends_on:
