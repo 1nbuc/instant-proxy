@@ -13,8 +13,7 @@ SERVERNAMES = SERVERNAMES.replace(',', ' ') + ' localhost' if SERVERNAMES else '
 SSL_PORTS = SSL_PORTS.split(',') if SSL_PORTS else ["443"]
 PORTS = PORTS.split(',') if PORTS else ["80"]
 
-full_config = '''events {}
-http { \n'''
+full_config = 'http { \n'
 
 for port in SSL_PORTS:
     CONFIG_STR = '''
