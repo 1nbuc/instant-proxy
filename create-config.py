@@ -66,7 +66,7 @@ full_config += '}'
 # check if /etc/nginx/default.conf exists
 if not os.path.exists('/etc/nginx/default.conf'):
 
-    with open('/etc/nginx/default.conf', 'w') as f:
+    with open('/etc/nginx/conf.d/default.conf', 'w') as f:
         f.write(full_config)
 
 print(full_config)
