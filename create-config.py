@@ -13,7 +13,7 @@ SERVERNAMES = SERVERNAMES.replace(',', ' ') + ' localhost' if SERVERNAMES else '
 SSL_PORTS = SSL_PORTS.split(',') if SSL_PORTS else ["443"]
 PORTS = PORTS.split(',') if PORTS else ["80"]
 
-full_config = 'http { \n'
+full_config = ''
 
 for port in SSL_PORTS:
     CONFIG_STR = '''
@@ -63,9 +63,12 @@ for port in PORTS:
 full_config += '}'
 
 # check if /etc/nginx/default.conf exists
-if not os.path.exists('/etc/nginx/default.conf'):
+if not os.path.exists('/etc/nginx/proxy.conf'):
 
-    with open('/etc/nginx/conf.d/default.conf', 'w') as f:
+    with open('/etc/nginx/conf.d/proxy.conf', 'w') as f:
         f.write(full_config)
+
+# move /etc/nginx/default.conf to /etc/nginx/default.conf.bak
+os.rename('/etc/nginx/conf.d/default.conf', '/etc/nginx/conf.d/default.conf.bak')
 
 print(full_config)
