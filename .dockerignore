@@ -1,5 +1,3 @@
 nginx.conf
-.env
-.idea
-certs
+.github
 nginx

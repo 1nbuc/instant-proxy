@@ -63,7 +63,10 @@ for port in PORTS:
 
 full_config += '}'
 
-with open('/etc/nginx/nginx.conf', 'w') as f:
-    f.write(full_config)
+# check if /etc/nginx/default.conf exists
+if not os.path.exists('/etc/nginx/default.conf'):
+
+    with open('/etc/nginx/default.conf', 'w') as f:
+        f.write(full_config)
 
 print(full_config)
