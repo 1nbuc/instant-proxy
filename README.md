@@ -36,3 +36,16 @@ docker run -d -p 443:443 -p 44300 -p 80:80 -p 8080 \
 ```
 
 ### Or use the docker-compose file
+
+
+## With certbot
+This currently only supports one domain.
+It will use openssl if certbot fails.
+```shell
+docker run -d -p 443:443 \
+  --name=proxy1 \
+  -e CONTAINER_ADDR=myapp:3000 \
+  -e SERVERNAMES=example.com \
+  --network=container:myapp \
+  ghcr.io/1nbuc/instant-proxy
+```
